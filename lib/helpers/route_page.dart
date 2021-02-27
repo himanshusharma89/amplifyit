@@ -1,3 +1,4 @@
+import 'package:amplifyit/dashboard.dart';
 import 'package:amplifyit/models/Post.dart';
 import 'package:amplifyit/views/about.dart';
 import 'package:amplifyit/views/home.dart';
@@ -23,7 +24,7 @@ class RoutePage {
       case RouteConstant.ROOT:
         return PageRouteBuilder(
             settings: settings,
-            pageBuilder: (_, __, ___) => Home(),
+            pageBuilder: (_, __, ___) => Dashboard(),
             transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c)
         );
 

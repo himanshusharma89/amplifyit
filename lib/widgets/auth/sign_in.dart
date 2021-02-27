@@ -1,6 +1,6 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
-import 'package:amplifyit/helpers/constants.dart';
+import 'package:amplifyit/dashboard.dart';
 import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:flutter/material.dart';
 
@@ -22,27 +22,17 @@ class _SignInState extends State<SignIn> {
     // }
 
     try {
-      SignInResult res =
-          await Amplify.Auth.signInWithWebUI(provider: AuthProvider.google);
-      print(res);
-      setState(() {
-        loader = true;
-      });
-      Navigator.pushNamedAndRemoveUntil(
-          context, RouteConstant.ROOT, (Route<dynamic> route) => false);
+      await Amplify.Auth.signInWithWebUI(provider: AuthProvider.google)
+          .whenComplete(() => setState(() {
+                loader = true;
+              }));
     } on AuthException catch (e) {
       setState(() {
         _signUpError = e.message;
       });
     }
-
-    try {
-      var res = await Amplify.Auth.fetchUserAttributes();
-      print(res[0].userAttributeKey);
-      print("fetchUserAttributes: $res");
-    } on AuthException catch (e) {
-      print(e.message);
-    }
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (_) => Dashboard()), (route) => false);
   }
 
   @override

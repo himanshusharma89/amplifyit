@@ -2,6 +2,7 @@ import 'package:amplifyit/helpers/constants.dart';
 import 'package:amplifyit/widgets/auth/sign_out.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BlogDrawer extends StatefulWidget {
   @override
@@ -32,6 +33,10 @@ class _BlogDrawerState extends State<BlogDrawer> {
                       Navigator.pushNamed(context, RouteConstant.ABOUT);
                     },
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset('assets/fun.svg'),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,

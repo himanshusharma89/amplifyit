@@ -9,6 +9,8 @@ import 'package:amplifyit/models/ModelProvider.dart';
 import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/views/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
@@ -34,8 +36,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _amplifyConfigured = false;
   bool _isSignedIn = false;
-  StreamSubscription subscription;
-  AmplifyDataStore datastorePlugin;
 
   @override
   void initState() {
@@ -46,41 +46,17 @@ class _MyAppState extends State<MyApp> {
   void _configureAmplify() async {
     if (!mounted) return;
 
-    datastorePlugin = AmplifyDataStore(modelProvider: ModelProvider.instance);
-    Amplify.addPlugins([AmplifyAuthCognito(), datastorePlugin, AmplifyAPI()]);
-
-    // subscription = Amplify.Hub.listen([HubChannel.Auth], (hubEvent) {
-    //   switch (hubEvent.eventName) {
-    //     case 'SIGNED_IN':
-    //       {
-    //         setState(() {
-    //           _isSignedIn = true;
-    //         });
-    //         print('HUB: USER IS SIGNED IN');
-    //       }
-    //       break;
-    //     case 'SIGNED_OUT':
-    //       {
-    //         setState(() {
-    //           _isSignedIn = false;
-    //         });
-    //         print('HUB: USER IS SIGNED OUT');
-    //       }
-    //       break;
-    //     case 'SESSION_EXPIRED':
-    //       {
-    //         setState(() {
-    //           _isSignedIn = false;
-    //         });
-    //         print('HUB: USER SESSION HAS EXPIRED');
-    //       }
-    //       break;
-    //   }
-    // });
+    await Amplify.addPlugins([
+      AmplifyAuthCognito(),
+      AmplifyDataStore(modelProvider: ModelProvider.instance),
+      AmplifyAPI()
+    ]);
 
     try {
       await Amplify.configure(amplifyconfig);
       print('Successfully configured Amplify 🎉');
+    } on PlatformException {
+      print("AmplifyAlreadyConfiguredException exception");
     } on AmplifyAlreadyConfiguredException {
       print("Amplify was already configured. Was the app restarted?");
     }
@@ -88,7 +64,6 @@ class _MyAppState extends State<MyApp> {
     try {
       _isSignedIn = await isSignedIn();
       setState(() {});
-      if (_isSignedIn) await Amplify.Auth.getCurrentUser();
     } on AmplifyException catch (e) {
       print('User is not signed in: $e');
     }
@@ -134,7 +109,18 @@ class _MyAppState extends State<MyApp> {
             ? _isSignedIn
                 ? Dashboard()
                 : LogIn()
-            : Scaffold(body: Center(child: CircularProgressIndicator())),
+            : Scaffold(
+                body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/loading.svg',
+                    height: 300,
+                  ),
+                  SizedBox(height: 20),
+                  Center(child: CircularProgressIndicator()),
+                ],
+              )),
         onGenerateRoute: RoutePage.generateRoute,
         initialRoute: RouteConstant.ROOT,
       ),

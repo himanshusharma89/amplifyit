@@ -36,58 +36,62 @@ class _EditPostState extends State<EditPost> {
           },
         ),
       ),
-      body: Form(
-        key: _formkey,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0),
-          child: Column(
-            children: <Widget>[
-              TextFormFieldShadow(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      hintText: "Post Title",
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.only(right: 15, left: 15),
-                      enabledBorder: InputBorder.none),
-                  onChanged: (value) => titleController.text = value,
-                  onSaved: (val) => titleController.text = val,
-                  validator: (val) {
-                    if (val.isEmpty) {
-                      return "Title filed can't be empty";
-                    }
-                    return null;
-                  },
-                ),
+      body: ListView(
+        children: [
+          Form(
+            key: _formkey,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0),
+              child: Column(
+                children: <Widget>[
+                  TextFormFieldShadow(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Post Title",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.only(right: 15, left: 15),
+                          enabledBorder: InputBorder.none),
+                      onChanged: (value) => titleController.text = value,
+                      onSaved: (val) => titleController.text = val,
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return "Title filed can't be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextFormFieldShadow(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Post Body",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.only(
+                              right: 15, top: 15, bottom: 15, left: 15),
+                          enabledBorder: InputBorder.none),
+                      maxLines: 7,
+                      onChanged: (value) => bodyController.text = value,
+                      onSaved: (val) => bodyController.text = val,
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return "Body field can't be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 15,
-              ),
-              TextFormFieldShadow(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      hintText: "Post Body",
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.only(
-                          right: 15, top: 15, bottom: 15, left: 15),
-                      enabledBorder: InputBorder.none),
-                  maxLines: 7,
-                  onChanged: (value) => bodyController.text = value,
-                  onSaved: (val) => bodyController.text = val,
-                  validator: (val) {
-                    if (val.isEmpty) {
-                      return "Body field can't be empty";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              SvgPicture.asset('assets/edit_post.svg', height: 200),
-            ],
+            ),
           ),
-        ),
+          SizedBox(
+            height: 60,
+          ),
+          SvgPicture.asset('assets/edit_post.svg', height: 200),
+        ],
       ),
       floatingActionButton: BlogButton(
         text: 'Update The Post',

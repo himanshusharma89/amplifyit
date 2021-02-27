@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
           ),
         ),
         title: Text(
-          'Amplifyit',
+          'AmplifyIt',
           style: TextStyle(fontSize: 24),
         ),
       ),
