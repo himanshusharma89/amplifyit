@@ -1,3 +1,4 @@
+import 'package:amplifyit/helpers/constants.dart';
 import 'package:amplifyit/models/Post.dart';
 import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/views/post/edit_post.dart';
@@ -80,10 +81,8 @@ class _PostViewState extends State<PostView> {
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.edit),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => EditPost(widget.post)));
-            // Navigator.pushNamed(context, RouteConstant.EDIT_POST,
-            //     arguments: widget.post);
+            Navigator.pushNamed(context, RouteConstant.EDIT_POST,
+                arguments: widget.post);
           }),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
+import 'package:amplifyit/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
 class SignOut extends StatefulWidget {
@@ -10,8 +11,8 @@ class SignOut extends StatefulWidget {
 class _SignOutState extends State<SignOut> {
   void _signOut() async {
     try {
-      await Amplify.Auth.signOut();
-      
+      await Amplify.Auth.signOut()
+          .whenComplete(() => Navigator.pushNamed(context, RouteConstant.AUTH));
     } on AuthException catch (e) {
       print(e);
     }

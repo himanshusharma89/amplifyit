@@ -1,5 +1,6 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
+import 'package:amplifyit/helpers/constants.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -9,19 +10,24 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   String _signUpError;
+  bool loader = false;
   void _signIn() async {
     // Sign out before in case a user is already signed in
     // If a user is already signed in - Amplify.Auth.signIn will throw an exception
-    try {
-      await Amplify.Auth.signOut();
-    } on AuthException catch (e) {
-      print(e);
-    }
+    // try {
+    //   await Amplify.Auth.signOut();
+    // } on AuthException catch (e) {
+    //   print(e);
+    // }
 
     try {
       SignInResult res =
           await Amplify.Auth.signInWithWebUI(provider: AuthProvider.google);
       print(res);
+      setState(() {
+        loader = true;
+      });
+      Navigator.pushNamed(context, RouteConstant.ROOT);
     } on AuthException catch (e) {
       setState(() {
         _signUpError = e.message;
@@ -39,9 +45,13 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _signIn,
-      child: const Text('Sign In'),
-    );
+    return loader
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : ElevatedButton(
+            onPressed: _signIn,
+            child: const Text('Sign In'),
+          );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:amplifyit/helpers/constants.dart';
 import 'package:amplifyit/models/ModelProvider.dart';
 import 'package:amplifyit/views/post/view_post.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,8 @@ class CardView extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => PostView(post)));
-          // Navigator.pushNamed(context, RouteConstant.VIEW_POST,
-          //     arguments: postsList[index]);
+          Navigator.pushNamed(context, RouteConstant.VIEW_POST,
+              arguments: post);
         },
         child: Container(
             decoration: BoxDecoration(

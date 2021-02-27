@@ -1,6 +1,7 @@
 import 'package:amplifyit/models/Post.dart';
 import 'package:amplifyit/views/about.dart';
 import 'package:amplifyit/views/home.dart';
+import 'package:amplifyit/views/login.dart';
 import 'package:amplifyit/views/post/add_post.dart';
 import 'package:amplifyit/views/post/edit_post.dart';
 import 'package:amplifyit/views/post/view_post.dart';
@@ -12,6 +13,13 @@ import 'constants.dart';
 class RoutePage {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RouteConstant.AUTH:
+        return PageRouteBuilder(
+            settings: settings,
+            pageBuilder: (_, __, ___) => LogIn(),
+            transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c)
+        );
+
       case RouteConstant.ROOT:
         return PageRouteBuilder(
             settings: settings,

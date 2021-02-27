@@ -1,3 +1,4 @@
+import 'package:amplifyit/views/about.dart';
 import 'package:amplifyit/views/home.dart';
 import 'package:amplifyit/views/post/add_post.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,9 +26,7 @@ class _DashboardState extends State<Dashboard> {
   final List<Widget> widgetList = [
     Home(),
     AddPost(),
-    Center(
-      child: Text("Cart"),
-    ),
+    About(),
   ];
 
   @override

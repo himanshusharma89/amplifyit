@@ -10,14 +10,6 @@ class About extends StatelessWidget {
         title: Text(
           "About",
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -131,10 +123,13 @@ class About extends StatelessWidget {
                         ),
                         SizedBox(height: 10.0),
                         GestureDetector(
-                            child: Image.asset(
-                              'assets/contribute_icon.png',
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://img.icons8.com/fluent/50/000000/github.png',
                               height: 26,
                               width: 26,
+                              placeholder: (_, str) =>
+                                  CircularProgressIndicator(),
                             ),
                             onTap: () => launcher.launcher(
                                 'https://github.com/himanshusharma89/amplifyit')),

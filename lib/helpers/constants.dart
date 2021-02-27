@@ -5,13 +5,12 @@ final Launcher launcher = Launcher();
 /// ROUTE CONSTANTS
 
 class RouteConstant {
+  static const AUTH = "/auth";
   static const ROOT = "/";
   static const ADD_POST = "/add-post";
   static const EDIT_POST = "/edit-post";
   static const VIEW_POST = "/view-post";
   static const ABOUT = "/about";
-  static const MEDIUM_ARTICLES = "/medium-articles";
-  static const MEDIUM_ARTICLES_WEB_VIEW = "/medium-article-web-view";
 }
 
 /// SOCIAL LINKS

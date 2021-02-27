@@ -28,9 +28,11 @@ dependencies:
   amplify_datastore: ^0.1.0
   amplify_datastore_plugin_interface: ^0.1.0
   amplify_flutter: ^0.1.0
+  cached_network_image: ^2.5.0
   google_fonts: ^1.1.2
   intl: ^0.15.7
   provider: ^4.3.3
+  url_launcher: ^5.7.10
 
 dev_dependencies:
   flutter_test:
