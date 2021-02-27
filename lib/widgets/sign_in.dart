@@ -39,12 +39,9 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: ElevatedButton(
-        onPressed: _signIn,
-        child: const Text('Sign In'),
-      ),
+    return ElevatedButton(
+      onPressed: _signIn,
+      child: const Text('Sign In'),
     );
   }
 }

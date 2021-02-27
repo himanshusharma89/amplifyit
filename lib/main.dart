@@ -7,7 +7,7 @@ import 'package:amplify_flutter/amplify.dart';
 import 'package:amplifyit/dashboard.dart';
 import 'package:amplifyit/models/ModelProvider.dart';
 import 'package:amplifyit/services/post_service.dart';
-import 'package:amplifyit/views/auth/login.dart';
+import 'package:amplifyit/views/login.dart';
 import 'package:amplifyit/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

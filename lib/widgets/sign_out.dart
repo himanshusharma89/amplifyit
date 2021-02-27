@@ -11,6 +11,7 @@ class _SignOutState extends State<SignOut> {
   void _signOut() async {
     try {
       await Amplify.Auth.signOut();
+      
     } on AuthException catch (e) {
       print(e);
     }
@@ -18,12 +19,9 @@ class _SignOutState extends State<SignOut> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: ElevatedButton(
-        onPressed: _signOut,
-        child: const Text('Sign In'),
-      ),
+    return ElevatedButton(
+      onPressed: _signOut,
+      child: const Text('Sign Out'),
     );
   }
 }
