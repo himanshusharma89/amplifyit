@@ -4,6 +4,7 @@ import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:amplify_flutter/amplify.dart';
+import 'package:amplifyit/dashboard.dart';
 import 'package:amplifyit/models/ModelProvider.dart';
 import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/views/auth/login.dart';
@@ -13,6 +14,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'amplifyconfiguration.dart';
+import 'helpers/constants.dart';
+import 'helpers/route_page.dart';
 
 void main() async {
   await initializeDateFormatting();
@@ -107,24 +110,49 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AmplifyIt',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            centerTitle: true,
+    return GestureDetector(
+      onTap: () => hideKeyboard(context),
+      child: MaterialApp(
+        title: 'AmplifyIt',
+        debugShowCheckedModeBanner: false,
+        builder: (context, child) =>
+            ScrollConfiguration(behavior: MyBehavior(), child: child),
+        theme: ThemeData(
+            backgroundColor: Colors.white,
+            scaffoldBackgroundColor: Colors.white,
+            primaryColor: Colors.white,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme),
-          )),
-      home: _amplifyConfigured
-          ? _isSignedIn
-              ? Home()
-              : LogIn()
-          : Scaffold(body: Center(child: CircularProgressIndicator())),
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              textTheme:
+                  GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme),
+            )),
+        home: _amplifyConfigured
+            ? _isSignedIn
+                ? Dashboard()
+                : LogIn()
+            : Scaffold(body: Center(child: CircularProgressIndicator())),
+        onGenerateRoute: RoutePage.generateRoute,
+        initialRoute: RouteConstant.ROOT,
+      ),
     );
+  }
+
+  void hideKeyboard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus.unfocus();
+    }
+  }
+}
+
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
