@@ -8,7 +8,6 @@ import 'package:amplifyit/dashboard.dart';
 import 'package:amplifyit/models/ModelProvider.dart';
 import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/views/login.dart';
-import 'package:amplifyit/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -88,8 +87,8 @@ class _MyAppState extends State<MyApp> {
 
     try {
       _isSignedIn = await isSignedIn();
-      var res = await Amplify.Auth.getCurrentUser();
-      print(res.username);
+      setState(() {});
+      if (_isSignedIn) await Amplify.Auth.getCurrentUser();
     } on AmplifyException catch (e) {
       print('User is not signed in: $e');
     }

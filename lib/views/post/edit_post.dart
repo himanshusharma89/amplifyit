@@ -1,5 +1,7 @@
+import 'package:amplifyit/helpers/constants.dart';
 import 'package:amplifyit/models/Post.dart';
 import 'package:amplifyit/services/post_service.dart';
+import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:amplifyit/widgets/text_form_field_shadow.dart';
 import 'package:flutter/material.dart';
 
@@ -82,18 +84,20 @@ class _EditPostState extends State<EditPost> {
           ),
         ),
       ),
-      floatingActionButton: ElevatedButton(
-          child: Text("Save Changes"),
-          onPressed: () {
-            PostService().updatePost(widget.post,
-                title: titleController.text.isEmpty
-                    ? widget.post.title
-                    : titleController.text,
-                body: bodyController.text.isEmpty
-                    ? widget.post.body
-                    : bodyController.text);
-          }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: BlogButton(
+        text: 'Update The Post',
+        onTap: () {
+          PostService().updatePost(widget.post,
+              title: titleController.text.isEmpty
+                  ? widget.post.title
+                  : titleController.text,
+              body: bodyController.text.isEmpty
+                  ? widget.post.body
+                  : bodyController.text);
+          Navigator.pushNamed(context, RouteConstant.ROOT);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

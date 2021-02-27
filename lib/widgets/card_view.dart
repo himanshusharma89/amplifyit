@@ -1,6 +1,5 @@
 import 'package:amplifyit/helpers/constants.dart';
 import 'package:amplifyit/models/ModelProvider.dart';
-import 'package:amplifyit/views/post/view_post.dart';
 import 'package:flutter/material.dart';
 
 class CardView extends StatelessWidget {

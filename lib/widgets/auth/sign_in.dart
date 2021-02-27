@@ -1,6 +1,7 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplifyit/helpers/constants.dart';
+import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -27,7 +28,8 @@ class _SignInState extends State<SignIn> {
       setState(() {
         loader = true;
       });
-      Navigator.pushNamed(context, RouteConstant.ROOT);
+      Navigator.pushNamedAndRemoveUntil(
+          context, RouteConstant.ROOT, (Route<dynamic> route) => false);
     } on AuthException catch (e) {
       setState(() {
         _signUpError = e.message;
@@ -49,9 +51,9 @@ class _SignInState extends State<SignIn> {
         ? Center(
             child: CircularProgressIndicator(),
           )
-        : ElevatedButton(
-            onPressed: _signIn,
-            child: const Text('Sign In'),
+        : BlogButton(
+            onTap: _signIn,
+            text: 'Sign In',
           );
   }
 }

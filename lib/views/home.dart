@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
-import 'package:amplify_flutter/amplify.dart';
 import 'package:amplifyit/models/ModelProvider.dart';
 import 'package:amplifyit/services/post_service.dart';
-import 'package:amplifyit/views/post/add_post.dart';
 import 'package:amplifyit/widgets/card_view.dart';
 import 'package:amplifyit/widgets/drawer.dart';
 import 'package:flutter/material.dart';

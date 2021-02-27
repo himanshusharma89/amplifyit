@@ -1,6 +1,7 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplifyit/helpers/constants.dart';
+import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:flutter/material.dart';
 
 class SignOut extends StatefulWidget {
@@ -11,8 +12,9 @@ class SignOut extends StatefulWidget {
 class _SignOutState extends State<SignOut> {
   void _signOut() async {
     try {
-      await Amplify.Auth.signOut()
-          .whenComplete(() => Navigator.pushNamed(context, RouteConstant.AUTH));
+      await Amplify.Auth.signOut().whenComplete(() =>
+          Navigator.pushNamedAndRemoveUntil(
+              context, RouteConstant.AUTH, (Route<dynamic> route) => false));
     } on AuthException catch (e) {
       print(e);
     }
@@ -20,9 +22,9 @@ class _SignOutState extends State<SignOut> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _signOut,
-      child: const Text('Sign Out'),
+    return BlogButton(
+      onTap: _signOut,
+      text: 'Sign Out',
     );
   }
 }

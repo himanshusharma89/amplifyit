@@ -1,7 +1,7 @@
 import 'package:amplifyit/helpers/constants.dart';
 import 'package:amplifyit/models/Post.dart';
 import 'package:amplifyit/services/post_service.dart';
-import 'package:amplifyit/views/post/edit_post.dart';
+import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -78,12 +78,14 @@ class _PostViewState extends State<PostView> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.edit),
-          onPressed: () {
-            Navigator.pushNamed(context, RouteConstant.EDIT_POST,
-                arguments: widget.post);
-          }),
+      floatingActionButton: BlogButton(
+        text: 'Edit The Post',
+        onTap: () {
+          Navigator.pushNamed(context, RouteConstant.EDIT_POST,
+              arguments: widget.post);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

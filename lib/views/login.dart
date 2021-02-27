@@ -1,4 +1,4 @@
-import 'package:amplifyit/widgets/sign_in.dart';
+import 'package:amplifyit/widgets/auth/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class LogIn extends StatelessWidget {

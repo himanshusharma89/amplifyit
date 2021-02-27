@@ -1,7 +1,8 @@
+import 'package:amplifyit/helpers/constants.dart';
 import 'package:amplifyit/services/post_service.dart';
+import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:amplifyit/widgets/text_form_field_shadow.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AddPost extends StatefulWidget {
   @override
@@ -74,16 +75,17 @@ class _AddPostState extends State<AddPost> {
           ),
         ],
       ),
-      floatingActionButton: ElevatedButton(
-        child: Text("Add The Post"),
-        onPressed: () {
+      floatingActionButton: BlogButton(
+        text: 'Add The Post',
+        onTap: () {
           PostService().savePost(
               title: titleController.text,
               date: DateTime.now().millisecondsSinceEpoch,
               body: bodyController.text);
+          Navigator.pushReplacementNamed(context, RouteConstant.ROOT);
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
