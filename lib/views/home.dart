@@ -4,11 +4,15 @@ import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_inte
 import 'package:amplifyit/models/ModelProvider.dart';
 import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/widgets/card_view.dart';
-import 'package:amplifyit/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
+  final GlobalKey<ScaffoldState> globalKey;
+
+  const Home({Key key, this.globalKey}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -18,7 +22,6 @@ class _HomeState extends State<Home> {
   List<String> _postStreamingData = <String>[];
   Stream<SubscriptionEvent<Post>> postStream;
   StreamSubscription hubSubscription;
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -50,12 +53,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _globalKey,
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
-            onTap: () => _globalKey.currentState.openDrawer(),
+            onTap: () => widget.globalKey.currentState.openDrawer(),
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -75,7 +77,6 @@ class _HomeState extends State<Home> {
           style: TextStyle(fontSize: 24),
         ),
       ),
-      drawer: BlogDrawer(),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
@@ -86,11 +87,24 @@ class _HomeState extends State<Home> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Write Blog\nAnonymously',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 26, height: 1.5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Write Blog\nAnonymously',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 26, height: 1.5),
+                    ),
+                    SvgPicture.asset(
+                      'assets/blog_post.svg',
+                      fit: BoxFit.contain,
+                      height: 100,
+                    )
+                  ],
                 ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               getWidgetToDisplayPostEvents(context),
             ],

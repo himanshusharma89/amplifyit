@@ -3,6 +3,7 @@ import 'package:amplifyit/models/Post.dart';
 import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 class PostView extends StatefulWidget {
@@ -75,6 +76,8 @@ class _PostViewState extends State<PostView> {
                 ),
               ],
             ),
+            SizedBox(height: 60,),
+            SvgPicture.asset('assets/view_post.svg', height: 200),
           ],
         ),
       ),

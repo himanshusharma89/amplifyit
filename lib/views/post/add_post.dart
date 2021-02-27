@@ -3,6 +3,7 @@ import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:amplifyit/widgets/text_form_field_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AddPost extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _AddPostState extends State<AddPost> {
           "Add Post",
         ),
       ),
-      body: ListView(
+      body: Column(
         children: [
           Form(
             key: _formkey,
@@ -73,6 +74,8 @@ class _AddPostState extends State<AddPost> {
               ),
             ),
           ),
+          SizedBox(height: 60,),
+          SvgPicture.asset('assets/add_post.svg', height: 200),
         ],
       ),
       floatingActionButton: BlogButton(

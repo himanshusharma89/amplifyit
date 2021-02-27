@@ -1,6 +1,7 @@
 import 'package:amplifyit/helpers/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class About extends StatelessWidget {
   @override
@@ -48,6 +49,10 @@ class About extends StatelessWidget {
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
                                 )),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            SvgPicture.asset('assets/flutter_dev.svg', height: 80),
                             SizedBox(
                               height: 10.0,
                             ),

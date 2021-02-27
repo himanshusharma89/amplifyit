@@ -120,6 +120,7 @@ class _MyAppState extends State<MyApp> {
             backgroundColor: Colors.white,
             scaffoldBackgroundColor: Colors.white,
             primaryColor: Colors.white,
+            primarySwatch: Colors.deepPurple,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme),
             appBarTheme: AppBarTheme(

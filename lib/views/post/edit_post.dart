@@ -4,6 +4,7 @@ import 'package:amplifyit/services/post_service.dart';
 import 'package:amplifyit/widgets/blog_button.dart';
 import 'package:amplifyit/widgets/text_form_field_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class EditPost extends StatefulWidget {
   final Post post;
@@ -79,7 +80,11 @@ class _EditPostState extends State<EditPost> {
                     return null;
                   },
                 ),
-              )
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              SvgPicture.asset('assets/edit_post.svg', height: 200),
             ],
           ),
         ),

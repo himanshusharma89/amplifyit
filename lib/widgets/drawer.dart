@@ -27,7 +27,6 @@ class _BlogDrawerState extends State<BlogDrawer> {
                         )),
                     trailing: Icon(
                       Icons.info,
-                      color: Colors.blueAccent,
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, RouteConstant.ABOUT);

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'widgets/bottom_navigation_bar/bottom_navigation_bar.dart' as bnb;
 import 'widgets/bottom_navigation_bar/bottom_navigation_bar_item.dart'
     as bnbitm;
+import 'widgets/drawer.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -14,24 +15,33 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final PageController pageController = PageController(initialPage: 0);
-
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   int index = 0;
 
   final List<bnbitm.BottomNavigationBarItem> items = [
-    bnbitm.BottomNavigationBarItem(icon: Icons.dashboard_rounded),
-    bnbitm.BottomNavigationBarItem(icon: Icons.add),
-    bnbitm.BottomNavigationBarItem(icon: Icons.info)
+    bnbitm.BottomNavigationBarItem(icon: Icons.home_rounded),
+    bnbitm.BottomNavigationBarItem(icon: Icons.add_circle_rounded),
+    bnbitm.BottomNavigationBarItem(icon: Icons.info_rounded)
   ];
 
-  final List<Widget> widgetList = [
-    Home(),
-    AddPost(),
-    About(),
-  ];
+  List<Widget> widgetList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    widgetList = [
+      Home(
+        globalKey: _globalKey,
+      ),
+      AddPost(),
+      About(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
       body: PageView.builder(
         controller: pageController,
         itemCount: widgetList.length,
@@ -42,6 +52,7 @@ class _DashboardState extends State<Dashboard> {
           });
         },
       ),
+      drawer: BlogDrawer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: bnb.BottomNavigationBar(
         onTap: (index) => pageController.animateToPage(index,
@@ -49,7 +60,6 @@ class _DashboardState extends State<Dashboard> {
         curve: Curves.easeInOut,
         items: items,
         currentIndex: index,
-        activeColor: Colors.blueAccent,
         inactiveColor: Colors.blueGrey,
       ),
     );
