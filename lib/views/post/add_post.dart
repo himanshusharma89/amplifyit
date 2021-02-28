@@ -13,8 +13,6 @@ class AddPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           'Add Post',
