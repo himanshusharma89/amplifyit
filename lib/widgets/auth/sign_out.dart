@@ -13,8 +13,9 @@ class _SignOutState extends State<SignOut> {
   Future<void> _signOut() async {
     try {
       await Amplify.Auth.signOut().whenComplete(() =>
-          Navigator.pushNamedAndRemoveUntil(
-              context, RouteConstant.AUTH, (Route<dynamic> route) => false));
+          Future<dynamic>.delayed(const Duration(milliseconds: 100)).then(
+              (dynamic value) => Navigator.pushNamedAndRemoveUntil(context,
+                  RouteConstant.AUTH, (Route<dynamic> route) => false)));
     } on AuthException catch (e) {
       // ignore: avoid_print
       print(e);
