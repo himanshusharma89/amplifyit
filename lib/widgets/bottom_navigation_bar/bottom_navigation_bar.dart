@@ -6,21 +6,11 @@ import 'bottom_navigation_bar_item.dart' as bnbitm;
 
 // ignore: must_be_immutable
 class BottomNavigationBar extends StatefulWidget {
-  final Curve curve;
-  final Color activeColor;
-  final Color inactiveColor;
-  final Color inactiveStripColor;
-  final Color indicatorColor;
-  final bool enableShadow;
-  int currentIndex;
-  final ValueChanged<int> onTap;
-  final List<bnbitm.BottomNavigationBarItem> items;
-
   BottomNavigationBar({
-    Key key,
-    this.curve = Curves.linear,
     @required this.onTap,
     @required this.items,
+    Key key,
+    this.curve = Curves.linear,
     this.activeColor,
     this.inactiveColor,
     this.inactiveStripColor,
@@ -34,16 +24,26 @@ class BottomNavigationBar extends StatefulWidget {
         assert(enableShadow != null),
         super(key: key);
 
+  final Curve curve;
+  final Color activeColor;
+  final Color inactiveColor;
+  final Color inactiveStripColor;
+  final Color indicatorColor;
+  final bool enableShadow;
+  int currentIndex;
+  final ValueChanged<int> onTap;
+  final List<bnbitm.BottomNavigationBarItem> items;
+
   @override
   State createState() => _BottomNavigationBarState();
 }
 
 class _BottomNavigationBarState extends State<BottomNavigationBar> {
-  static const double BAR_HEIGHT = kBottomNavigationBarHeight;
-  static const double INDICATOR_HEIGHT = 2;
+  static const double barHeight = kBottomNavigationBarHeight;
+  static const double indicatorHeight = 2;
   double width = 0;
   Color activeColor;
-  Duration duration = Duration(milliseconds: 270);
+  Duration duration = const Duration(milliseconds: 270);
 
   Curve get curve => widget.curve;
 
@@ -55,13 +55,13 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
     activeColor = widget.activeColor ?? Theme.of(context).indicatorColor;
 
     return Container(
-      height: BAR_HEIGHT,
+      height: barHeight,
       width: width,
       decoration: BoxDecoration(
         color: widget.inactiveStripColor ?? Theme.of(context).cardColor,
         boxShadow: widget.enableShadow
-            ? [
-                BoxShadow(color: Colors.black12, blurRadius: 10),
+            ? <BoxShadow>[
+                const BoxShadow(color: Colors.black12, blurRadius: 10),
               ]
             : null,
       ),
@@ -69,11 +69,11 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
         clipBehavior: Clip.antiAlias,
         children: <Widget>[
           Positioned(
-            top: INDICATOR_HEIGHT,
+            top: indicatorHeight,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: items.map((item) {
-                var index = items.indexOf(item);
+              children: items.map((bnbitm.BottomNavigationBarItem item) {
+                final int index = items.indexOf(item);
                 return GestureDetector(
                   onTap: () => _select(index),
                   child: _buildItemWidget(item, index == widget.currentIndex),
@@ -92,7 +92,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
               child: Container(
                 color: widget.indicatorColor ?? activeColor,
                 width: width / items.length,
-                height: INDICATOR_HEIGHT,
+                height: indicatorHeight,
               ),
             ),
           ),
@@ -102,14 +102,15 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
   }
 
   double _getIndicatorPosition(int index) {
-    var isLtr = Directionality.of(context) == TextDirection.ltr;
-    if (isLtr)
+    final bool isLtr = Directionality.of(context) == TextDirection.ltr;
+    if (isLtr) {
       return lerpDouble(-1.0, 1.0, index / (items.length - 1));
-    else
+    } else {
       return lerpDouble(1.0, -1.0, index / (items.length - 1));
+    }
   }
 
-  _select(int index) {
+  void _select(int index) {
     widget.currentIndex = index;
     widget.onTap(widget.currentIndex);
 
@@ -128,7 +129,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> {
       bnbitm.BottomNavigationBarItem item, bool isSelected) {
     return Container(
         color: item.backgroundColor,
-        height: BAR_HEIGHT,
+        height: barHeight,
         width: width / items.length,
         child: Center(
           child: _buildIcon(item, isSelected),

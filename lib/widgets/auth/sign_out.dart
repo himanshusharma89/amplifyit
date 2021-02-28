@@ -10,12 +10,13 @@ class SignOut extends StatefulWidget {
 }
 
 class _SignOutState extends State<SignOut> {
-  void _signOut() async {
+  Future<void> _signOut() async {
     try {
       await Amplify.Auth.signOut().whenComplete(() =>
           Navigator.pushNamedAndRemoveUntil(
               context, RouteConstant.AUTH, (Route<dynamic> route) => false));
     } on AuthException catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }

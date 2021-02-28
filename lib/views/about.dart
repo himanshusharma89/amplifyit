@@ -8,33 +8,32 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "About",
+        title: const Text(
+          'About',
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Want to pen down your thoughts in the form of a blog anonymously?",
+            children: <Widget>[
+              const Text(
+                'Want to pen down your thoughts in the form of a blog anonymously?',
                 style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Text(
-                "This is just the App for you! You can post your blogs and no one can know about the original poster.",
+              const Text(
+                'This is just the App for you! You can post your blogs and no one can know about the original poster.',
                 style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Stack(
-                children: [
-                  Container(
+                children: <Widget>[
+                  SizedBox(
                     width: double.infinity,
                     child: Card(
                       elevation: 5.0,
@@ -42,58 +41,53 @@ class About extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 40.0, bottom: 15),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text("Himanshu Sharma",
+                            const Text('Himanshu Sharma',
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 10.0,
                             ),
-                            SvgPicture.asset('assets/flutter_dev.svg', height: 80),
-                            SizedBox(
+                            SvgPicture.asset('assets/flutter_dev.svg',
+                                height: 80),
+                            const SizedBox(
                               height: 10.0,
                             ),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: social
                                     .map(
-                                      (e) => Padding(
+                                      (Social e) => Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8),
                                         child: GestureDetector(
-                                            child: CachedNetworkImage(
-                                              imageUrl: e['iconURL'],
-                                              height: 26,
-                                              width: 26,
-                                              placeholder: (_, str) =>
-                                                  CircularProgressIndicator(),
-                                            ),
-                                            onTap: () =>
-                                                launcher.launcher(e['URL'])),
+                                          onTap: () => launcher.launcher(e.URL),
+                                          child: CachedNetworkImage(
+                                            imageUrl: e.iconURL,
+                                            height: 26,
+                                            width: 26,
+                                            placeholder: (_, String str) =>
+                                                const CircularProgressIndicator(),
+                                          ),
+                                        ),
                                       ),
                                     )
                                     .toList()),
-                            SizedBox(
+                            const SizedBox(
                               height: 10.0,
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  'The Developer behind this project',
-                                  style: TextStyle(fontSize: 15),
-                                )
-                              ],
+                            const Text(
+                              'The Developer behind this project',
+                              style: TextStyle(fontSize: 15),
                             ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     top: .0,
                     left: .0,
                     right: .0,
@@ -107,7 +101,7 @@ class About extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Card(
                   elevation: 5.0,
@@ -116,34 +110,34 @@ class About extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text("Contributing",
+                        const Text('Contributing',
                             style: TextStyle(
                                 fontSize: 22.0, fontWeight: FontWeight.w600)),
-                        SizedBox(height: 10.0),
-                        Text(
-                          "If you wish to contribute a change to any of the existing features in this application, please review our contribution guide and send a pull request.",
+                        const SizedBox(height: 10.0),
+                        const Text(
+                          'If you wish to contribute a change to any of the existing features in this application, please review our contribution guide and send a pull request.',
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         GestureDetector(
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  'https://img.icons8.com/fluent/50/000000/github.png',
-                              height: 26,
-                              width: 26,
-                              placeholder: (_, str) =>
-                                  CircularProgressIndicator(),
-                            ),
-                            onTap: () => launcher.launcher(
-                                'https://github.com/himanshusharma89/amplifyit')),
+                          onTap: () => launcher.launcher(
+                              'https://github.com/himanshusharma89/amplifyit'),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                'https://img.icons8.com/fluent/50/000000/github.png',
+                            height: 26,
+                            width: 26,
+                            placeholder: (_, String str) =>
+                                const CircularProgressIndicator(),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               )
             ],
@@ -155,8 +149,7 @@ class About extends StatelessWidget {
 }
 
 class Data {
+  Data(this.img, this.data);
   String img;
   String data;
-
-  Data(this.img, this.data);
 } //Class to hold the image path and data to be displayed

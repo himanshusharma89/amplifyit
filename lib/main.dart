@@ -18,11 +18,11 @@ import 'amplifyconfiguration.dart';
 import 'helpers/constants.dart';
 import 'helpers/route_page.dart';
 
-void main() async {
+Future<void> main() async {
   await initializeDateFormatting();
   runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => PostService()),
+    providers: <ChangeNotifierProvider<dynamic>>[
+      ChangeNotifierProvider<PostService>(create: (_) => PostService()),
     ],
     child: MyApp(),
   ));
@@ -43,10 +43,10 @@ class _MyAppState extends State<MyApp> {
     _configureAmplify();
   }
 
-  void _configureAmplify() async {
+  Future<void> _configureAmplify() async {
     if (!mounted) return;
 
-    await Amplify.addPlugins([
+    await Amplify.addPlugins(<AmplifyPluginInterface>[
       AmplifyAuthCognito(),
       AmplifyDataStore(modelProvider: ModelProvider.instance),
       AmplifyAPI()
@@ -54,17 +54,21 @@ class _MyAppState extends State<MyApp> {
 
     try {
       await Amplify.configure(amplifyconfig);
+      // ignore: avoid_print
       print('Successfully configured Amplify 🎉');
     } on PlatformException {
-      print("AmplifyAlreadyConfiguredException exception");
+      // ignore: avoid_print
+      print('AmplifyAlreadyConfiguredException exception');
     } on AmplifyAlreadyConfiguredException {
-      print("Amplify was already configured. Was the app restarted?");
+      // ignore: avoid_print
+      print('Amplify was already configured. Was the app restarted?');
     }
 
     try {
       _isSignedIn = await isSignedIn();
       setState(() {});
     } on AmplifyException catch (e) {
+      // ignore: avoid_print
       print('User is not signed in: $e');
     }
 
@@ -73,12 +77,13 @@ class _MyAppState extends State<MyApp> {
         _amplifyConfigured = true;
       });
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }
 
   Future<bool> isSignedIn() async {
-    final session = await Amplify.Auth.fetchAuthSession();
+    final AuthSession session = await Amplify.Auth.fetchAuthSession();
     return session.isSignedIn;
   }
 
@@ -89,7 +94,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'AmplifyIt',
         debugShowCheckedModeBanner: false,
-        builder: (context, child) =>
+        builder: (_, Widget child) =>
             ScrollConfiguration(behavior: MyBehavior(), child: child),
         theme: ThemeData(
             backgroundColor: Colors.white,
@@ -112,13 +117,13 @@ class _MyAppState extends State<MyApp> {
             : Scaffold(
                 body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   SvgPicture.asset(
                     'assets/loading.svg',
                     height: 300,
                   ),
-                  SizedBox(height: 20),
-                  Center(child: CircularProgressIndicator()),
+                  const SizedBox(height: 20),
+                  const Center(child: CircularProgressIndicator()),
                 ],
               )),
         onGenerateRoute: RoutePage.generateRoute,
@@ -128,7 +133,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void hideKeyboard(BuildContext context) {
-    FocusScopeNode currentFocus = FocusScope.of(context);
+    final FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
       FocusManager.instance.primaryFocus.unfocus();
     }

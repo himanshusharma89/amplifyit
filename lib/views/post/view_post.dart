@@ -7,9 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 class PostView extends StatefulWidget {
+  const PostView(this.post);
   final Post post;
-
-  PostView(this.post);
 
   @override
   _PostViewState createState() => _PostViewState();
@@ -18,6 +17,7 @@ class PostView extends StatefulWidget {
 class _PostViewState extends State<PostView> {
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_print
     print(widget.post.date);
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +25,7 @@ class _PostViewState extends State<PostView> {
           widget.post.title,
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
           ),
           onPressed: () {
@@ -40,27 +40,27 @@ class _PostViewState extends State<PostView> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Card(
                     child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     widget.post.body,
-                    style: TextStyle(fontSize: 16.0),
+                    style: const TextStyle(fontSize: 16.0),
                   ),
                 )),
               ),
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: <Widget>[
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(12, 4, 4, 4),
                     child: Text(
-                      "Published: ${DateFormat.yMMMEd().format(DateTime.fromMillisecondsSinceEpoch(widget.post.date))}",
-                      style: TextStyle(
+                      'Published: ${DateFormat.yMMMEd().format(DateTime.fromMillisecondsSinceEpoch(widget.post.date))}',
+                      style: const TextStyle(
                         fontSize: 14.0,
                         // color: Color(0xff133337),
                       ),
@@ -68,7 +68,7 @@ class _PostViewState extends State<PostView> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                   onPressed: () {
                     PostService().deletePost(widget.post.id);
                     Navigator.pop(context);
@@ -76,7 +76,9 @@ class _PostViewState extends State<PostView> {
                 ),
               ],
             ),
-            SizedBox(height: 60,),
+            const SizedBox(
+              height: 60,
+            ),
             SvgPicture.asset('assets/view_post.svg', height: 200),
           ],
         ),

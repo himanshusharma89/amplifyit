@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CardView extends StatelessWidget {
+  const CardView({this.post});
   final Post post;
-  CardView({this.post});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,38 +20,42 @@ class CardView extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: <BoxShadow>[
                   BoxShadow(
-                      offset: Offset(2, 2),
+                      offset: const Offset(2, 2),
                       color: Colors.grey[300],
                       blurRadius: 6),
                   BoxShadow(
-                      offset: Offset(-1, -1),
+                      offset: const Offset(-1, -1),
                       color: Colors.grey[300],
                       blurRadius: 3)
                 ]),
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
-                children: [
-                  SvgPicture.asset('assets/read_post.svg',height: 50,),
-                  SizedBox(width: 10,),
+                children: <Widget>[
+                  SvgPicture.asset(
+                    'assets/read_post.svg',
+                    height: 50,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       Text(
                         post.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       Text(
                         post.body,
-                        style: TextStyle(),
                       )
                     ],
                   ),

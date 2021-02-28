@@ -9,19 +9,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  final GlobalKey<ScaffoldState> globalKey;
-
   const Home({Key key, this.globalKey}) : super(key: key);
+  final GlobalKey<ScaffoldState> globalKey;
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  List<Post> _posts = <Post>[];
-  List<String> _postStreamingData = <String>[];
   Stream<SubscriptionEvent<Post>> postStream;
-  StreamSubscription hubSubscription;
 
   @override
   void initState() {
@@ -62,17 +58,17 @@ class _HomeState extends State<Home> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
+                  boxShadow: <BoxShadow>[
                     BoxShadow(
-                        offset: Offset(2, 2),
+                        offset: const Offset(2, 2),
                         color: Colors.grey[300],
                         blurRadius: 6),
                   ]),
-              child: Icon(Icons.menu_rounded),
+              child: const Icon(Icons.menu_rounded),
             ),
           ),
         ),
-        title: Text(
+        title: const Text(
           'AmplifyIt',
           style: TextStyle(fontSize: 24),
         ),
@@ -84,26 +80,25 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
+                  children: <Widget>[
+                    const Text(
                       'Write Blog\nAnonymously',
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: 26, height: 1.5),
                     ),
                     SvgPicture.asset(
                       'assets/blog_post.svg',
-                      fit: BoxFit.contain,
                       height: 100,
                     )
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               getWidgetToDisplayPostEvents(context),
@@ -115,19 +110,19 @@ class _HomeState extends State<Home> {
   }
 
   Widget getWidgetToDisplayPostEvents(BuildContext context) {
-    return Consumer<PostService>(builder: (context, ps, child) {
-      return FutureBuilder(
+    return Consumer<PostService>(builder: (_, PostService ps, Widget child) {
+      return FutureBuilder<List<Post>>(
           future: ps.runQueries(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData)
+          builder: (_, AsyncSnapshot<List<Post>> snapshot) {
+            if (snapshot.hasData) {
               return ListView.builder(
                   shrinkWrap: true,
-                  reverse: false,
                   itemCount: ps.posts.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardView(post: ps.posts[index]);
                   });
-            return Center(
+            }
+            return const Center(
               child: CircularProgressIndicator(),
             );
           });

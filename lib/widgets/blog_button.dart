@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class BlogButton extends StatelessWidget {
+  const BlogButton({Key key, this.onTap, this.text}) : super(key: key);
   final Function() onTap;
   final String text;
-  const BlogButton({Key key, this.onTap, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Container(
@@ -16,24 +17,23 @@ class BlogButton extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: <BoxShadow>[
                   BoxShadow(
-                      offset: Offset(2, 2),
+                      offset: const Offset(2, 2),
                       color: Colors.grey[300],
                       blurRadius: 6),
                   BoxShadow(
-                      offset: Offset(-1, -1),
+                      offset: const Offset(-1, -1),
                       color: Colors.grey[300],
                       blurRadius: 3)
                 ]),
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             )),
       ),
-      onTap: onTap,
     );
   }
 }

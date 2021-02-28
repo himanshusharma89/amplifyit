@@ -10,9 +10,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  String _signUpError;
   bool loader = false;
-  void _signIn() async {
+  Future<void> _signIn() async {
     // Sign out before in case a user is already signed in
     // If a user is already signed in - Amplify.Auth.signIn will throw an exception
     // try {
@@ -26,19 +25,19 @@ class _SignInState extends State<SignIn> {
           .whenComplete(() => setState(() {
                 loader = true;
               }));
-    } on AuthException catch (e) {
-      setState(() {
-        _signUpError = e.message;
-      });
+    } on AuthException {
+      setState(() {});
     }
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (_) => Dashboard()), (route) => false);
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute<dynamic>(builder: (_) => Dashboard()),
+        (Route<dynamic> route) => false);
   }
 
   @override
   Widget build(BuildContext context) {
     return loader
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : BlogButton(

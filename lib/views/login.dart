@@ -10,28 +10,28 @@ class LogIn extends StatelessWidget {
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
+          children: <Widget>[
+            const Text(
               'Welcome to',
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               'AmplifyIt',
               style: TextStyle(
                 fontSize: 35,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SvgPicture.asset(
               'assets/login.svg',
               height: 200,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SignIn(),

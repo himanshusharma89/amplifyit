@@ -14,22 +14,22 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final PageController pageController = PageController(initialPage: 0);
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  final PageController pageController = PageController();
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   int index = 0;
 
-  final List<bnbitm.BottomNavigationBarItem> items = [
+  final List<bnbitm.BottomNavigationBarItem> items = <bnbitm.BottomNavigationBarItem>[
     bnbitm.BottomNavigationBarItem(icon: Icons.home_rounded),
     bnbitm.BottomNavigationBarItem(icon: Icons.add_circle_rounded),
     bnbitm.BottomNavigationBarItem(icon: Icons.info_rounded)
   ];
 
-  List<Widget> widgetList = [];
+  List<Widget> widgetList = <Widget>[];
 
   @override
   void initState() {
     super.initState();
-    widgetList = [
+    widgetList = <Widget>[
       Home(
         globalKey: _globalKey,
       ),
@@ -45,8 +45,8 @@ class _DashboardState extends State<Dashboard> {
       body: PageView.builder(
         controller: pageController,
         itemCount: widgetList.length,
-        itemBuilder: (context, index) => widgetList[index],
-        onPageChanged: (value) {
+        itemBuilder: (_, int index) => widgetList[index],
+        onPageChanged: (int value) {
           setState(() {
             index = value;
           });
@@ -55,8 +55,8 @@ class _DashboardState extends State<Dashboard> {
       drawer: BlogDrawer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: bnb.BottomNavigationBar(
-        onTap: (index) => pageController.animateToPage(index,
-            duration: Duration(milliseconds: 250), curve: Curves.ease),
+        onTap: (int index) => pageController.animateToPage(index,
+            duration: const Duration(milliseconds: 250), curve: Curves.ease),
         curve: Curves.easeInOut,
         items: items,
         currentIndex: index,

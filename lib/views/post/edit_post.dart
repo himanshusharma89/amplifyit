@@ -7,9 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EditPost extends StatefulWidget {
+  const EditPost(this.post);
   final Post post;
-
-  EditPost(this.post);
 
   @override
   _EditPostState createState() => _EditPostState();
@@ -24,11 +23,11 @@ class _EditPostState extends State<EditPost> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Edit Post",
+        title: const Text(
+          'Edit Post',
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
           ),
           onPressed: () {
@@ -37,7 +36,7 @@ class _EditPostState extends State<EditPost> {
         ),
       ),
       body: ListView(
-        children: [
+        children: <Widget>[
           Form(
             key: _formkey,
             child: Padding(
@@ -46,14 +45,14 @@ class _EditPostState extends State<EditPost> {
                 children: <Widget>[
                   TextFormFieldShadow(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "Post Title",
+                      decoration: const InputDecoration(
+                          hintText: 'Post Title',
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.only(right: 15, left: 15),
                           enabledBorder: InputBorder.none),
-                      onChanged: (value) => titleController.text = value,
-                      onSaved: (val) => titleController.text = val,
-                      validator: (val) {
+                      onChanged: (String value) => titleController.text = value,
+                      onSaved: (String val) => titleController.text = val,
+                      validator: (String val) {
                         if (val.isEmpty) {
                           return "Title filed can't be empty";
                         }
@@ -61,21 +60,21 @@ class _EditPostState extends State<EditPost> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   TextFormFieldShadow(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "Post Body",
+                      decoration: const InputDecoration(
+                          hintText: 'Post Body',
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.only(
                               right: 15, top: 15, bottom: 15, left: 15),
                           enabledBorder: InputBorder.none),
                       maxLines: 7,
-                      onChanged: (value) => bodyController.text = value,
-                      onSaved: (val) => bodyController.text = val,
-                      validator: (val) {
+                      onChanged: (String value) => bodyController.text = value,
+                      onSaved: (String val) => bodyController.text = val,
+                      validator: (String val) {
                         if (val.isEmpty) {
                           return "Body field can't be empty";
                         }
@@ -87,7 +86,7 @@ class _EditPostState extends State<EditPost> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 60,
           ),
           SvgPicture.asset('assets/edit_post.svg', height: 200),
