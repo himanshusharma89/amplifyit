@@ -1,8 +1,10 @@
+[<img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1614077470263/FjRAQ6IMS.png" width="50%">](https://blog.himanshusharma.tech/blogs-app-using-flutter-and-aws-amplify)
+
 # Amplifyit
 
 A new Flutter project utilizing AWS Amplify as backend for the [AWS Amplify Hackthon on Hashnode](https://townhall.hashnode.com/announcing-aws-amplify-hackathon-on-hashnode).
 
-[<img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1614077470263/FjRAQ6IMS.png">](https://blog.himanshusharma.tech/blogs-app-using-flutter-and-aws-amplify)
+<img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1614535915309/rdWRWI6Qk.png">
 
 ## Getting Started
 
