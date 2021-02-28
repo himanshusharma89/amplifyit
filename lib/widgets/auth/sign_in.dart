@@ -25,13 +25,23 @@ class _SignInState extends State<SignIn> {
           .whenComplete(() => setState(() {
                 loader = true;
               }));
-    } on AuthException {
-      setState(() {});
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute<dynamic>(builder: (_) => Dashboard()),
+          (Route<dynamic> route) => false);
+    } on UserCancelledException catch (e) {
+      // ignore: avoid_print
+      print('Exception: $e');
+      setState(() {
+        loader = false;
+      });
+    } on AuthException catch (e) {
+      // ignore: avoid_print
+      print('Exception: $e');
+      setState(() {
+        loader = false;
+      });
     }
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute<dynamic>(builder: (_) => Dashboard()),
-        (Route<dynamic> route) => false);
   }
 
   @override

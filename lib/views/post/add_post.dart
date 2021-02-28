@@ -84,7 +84,8 @@ class AddPost extends StatelessWidget {
               title: titleController.text,
               date: DateTime.now().millisecondsSinceEpoch,
               body: bodyController.text);
-          Navigator.pushReplacementNamed(context, RouteConstant.ROOT);
+          Navigator.pushNamedAndRemoveUntil(
+              context, RouteConstant.ROOT, (Route<dynamic> route) => false);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
