@@ -6,6 +6,8 @@ import 'package:amplifyit/widgets/text_form_field_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../dashboard.dart';
+
 class EditPost extends StatefulWidget {
   const EditPost(this.post);
   final Post post;
@@ -102,7 +104,10 @@ class _EditPostState extends State<EditPost> {
               body: bodyController.text.isEmpty
                   ? widget.post.body
                   : bodyController.text);
-          Navigator.pushNamed(context, RouteConstant.ROOT);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute<dynamic>(builder: (_) => Dashboard()),
+              (Route<dynamic> route) => false);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
