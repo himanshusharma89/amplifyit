@@ -5,6 +5,8 @@ import 'package:amplifyit/widgets/text_form_field_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../dashboard.dart';
+
 class AddPost extends StatelessWidget {
   final GlobalKey<FormState> _formkey = GlobalKey();
   final TextEditingController titleController = TextEditingController();
@@ -82,8 +84,10 @@ class AddPost extends StatelessWidget {
               title: titleController.text,
               date: DateTime.now().millisecondsSinceEpoch,
               body: bodyController.text);
-          Navigator.pushNamedAndRemoveUntil(
-              context, RouteConstant.ROOT, (Route<dynamic> route) => false);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute<dynamic>(builder: (_) => Dashboard()),
+              (Route<dynamic> route) => false);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
